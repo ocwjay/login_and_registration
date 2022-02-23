@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="column">
+        <h2>Register</h2>
+        {% with messages = get_flashed_messages(category_filter=['register']) %}
+            {% if messages %}
+            <div class="flashbox">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+        <form action="/user_register_submit" method="post">
+            <label for="fname">First Name:</label>
+            <input type="text" name="fname" id="fname" class="inputbox">
+            <label for="lname">Last Name:</label>
+            <input type="text" name="lname" id="lname" class="inputbox">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" class="inputbox">
+            <label for="dob">Date of Birth:</label>
+            <input type="date" name="dob" id="dob" class="inputbox">
+            <label for="language_select">Favorite Programming Laguage:</label>
+            <select name="language_select" id="language_select" class="inputbox">
+                <option value="none">--Please Select a Language--</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="js">JavaScript</option>
+                <option value="python">Python</option>
+                <option value="csharp">C#</option>
+            </select>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" class="inputbox">
+            <label for="pass_confirm">Confirm Password:</label>
+            <input type="password" name="pass_confirm" id="pass_confirm" class="inputbox">
+            <input type="submit" value="Submit" class="btn">
+        </form>
+    </div>
+    <div class="column2">
+        <h2>Login</h2>
+        {% with messages = get_flashed_messages(category_filter=['login']) %}
+            {% if messages %}
+                <div class="flashbox">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <form action="/login_submission" method="post">
+            <label for="email_login">Email:</label>
+            <input type="text" name="email_login" id="email_login" class="inputbox">
+            <label for="pass_login">Password</label>
+            <input type="password" name="pass_login" id="pass_login" class="inputbox">
+            <input type="submit" value="Log In" class="btn">
+        </form>
+    </div>
+</body>
+</html>
